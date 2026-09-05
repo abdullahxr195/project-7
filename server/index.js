@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import productsRoutes from "./src/routes/products.Routes.js";
 import categoriesRouters from "./src/routes/category.Routes.js";
+import authRoutes from "./src/routes/auth.Routes.js"
 dotenv.config();
 
 const app = express();
@@ -12,7 +13,7 @@ app.use(bodyParser.json());
 
 app.use("/api", categoriesRouters);
 app.use("/api", productsRoutes);
-
+app.use("/api", authRoutes)
 connectDb();
 
 app.get("/health", (req, res) => {
