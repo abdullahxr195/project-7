@@ -1,5 +1,6 @@
 import Product from "../models/products.Model.js";
 
+
 export const getAllProducts = async (erq, res) => {
   try {
     const products = await Product.find();
@@ -137,3 +138,4 @@ export const deleteProductById = async (req, res) => {
     return res.status(500).json({ message: "internal server error" });
   }
 };
+

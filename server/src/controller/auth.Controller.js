@@ -39,7 +39,7 @@ export const register = async (req, res) => {
         .status(400)
         .json({
           message:
-            "password shoud contains letters in lower case and upperaces and numbers",
+            "password shoud contains letters in lower case and upperaces and numbers and special charecters and at least 8 charecters length",
         });
     }
 
