@@ -12,6 +12,31 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 
+
+
+// app.use(
+
+// cors({
+// origin:""
+
+
+
+// })
+
+
+
+
+
+
+// )
+
+
+
+
+
+
+
+
 app.use("/api", categoriesRouters);
 app.use("/api", productsRoutes);
 app.use("/api", authRoutes)

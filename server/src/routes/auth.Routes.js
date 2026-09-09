@@ -1,11 +1,11 @@
 import express from "express"
-import { register } from "../controller/auth.Controller.js"
+import { login, register } from "../controller/auth.Controller.js"
 
 
 const router = express.Router()
 
 router.post("/auth/register",register)
-
+router.post("/auth/login",login)
 
 
 
