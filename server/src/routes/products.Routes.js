@@ -4,7 +4,7 @@ import {protect} from "../middleware/protect.Middleware.js"
 
 const router = express.Router()
 
-router.get("/hetall-products",getAllProducts)
+router.get("/all-products",getAllProducts)
 router.post("/product",protect,createProduct)
 router.get("/product/:id",getProductById)
 

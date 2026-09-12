@@ -3,6 +3,7 @@
     "bcryptjs": "^3.0.3",
     "body-parser": "^2.3.0",
     "config": "^5.0.1",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "expres": "^0.0.5",
     "express": "^5.2.1",

@@ -5,42 +5,26 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import productsRoutes from "./src/routes/products.Routes.js";
 import categoriesRouters from "./src/routes/category.Routes.js";
-import authRoutes from "./src/routes/auth.Routes.js"
-import userRoutes from "./src/routes/user.Routes.js"
+import authRoutes from "./src/routes/auth.Routes.js";
+import userRoutes from "./src/routes/user.Routes.js";
+import cors from "cors";
 dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
 
-
-
-// app.use(
-
-// cors({
-// origin:""
-
-
-
-// })
-
-
-
-
-
-
-// )
-
-
-
-
-
-
-
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["PUT", "POST", "DELETE", "PATCH", "GET"],
+    credentials: true,
+  }),
+);
 
 app.use("/api", categoriesRouters);
 app.use("/api", productsRoutes);
-app.use("/api", authRoutes)
-app.use("/api", userRoutes)
+app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 connectDb();
 
 app.get("/health", (req, res) => {

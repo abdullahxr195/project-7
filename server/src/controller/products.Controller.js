@@ -3,7 +3,7 @@ import Product from "../models/products.Model.js";
 
 export const getAllProducts = async (erq, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("catId" , "name")
     if (products.length) {
       return res.status(200).json({ message: "No Product yet", Products: [] });
     }
@@ -65,7 +65,7 @@ export const getProductById = async (req, res) => {
       return res.status(400).json({ message: "no selected item" });
     }
 
-    const product = await Product.findById({ _id, id });
+    const product = await Product.findById({ _id, id }).populate("catId", "name descriprion");
     if (!product) {
       return res.status(404).json({ message: "product is not fuond" });
     }
