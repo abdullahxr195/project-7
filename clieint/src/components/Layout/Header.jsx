@@ -31,13 +31,18 @@ export default function Header() {
                 gap: 2,
               }}
             >
-              <MenuItem onClick={()=>navigate("/product")}>Products</MenuItem>
-              <MenuItem onClick={()=>navigate("/categories")}>Categories</MenuItem>
+              <MenuItem onClick={() => navigate("/products")}>
+                Products
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/categories")}>
+                Categories
+              </MenuItem>
               <MenuItem>About</MenuItem>
-              <MenuItem>Login</MenuItem>
-              <MenuItem>Register</MenuItem>
+
               <MenuItem>Contact Us</MenuItem>
               <MenuItem>Cart</MenuItem>
+              <MenuItem>Login</MenuItem>
+              <MenuItem  onClick={() => navigate("/register")}>Register</MenuItem>
             </MenuList>
           </Box>
         </Toolbar>

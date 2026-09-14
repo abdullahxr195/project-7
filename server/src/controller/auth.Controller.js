@@ -22,7 +22,7 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "email already exist" });
     }
 
-    const emaildRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emaildRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (emaildRegex.test(email)) {
       return res.status(400).json({ message: "pleas enter a valid email!" });
     }
@@ -82,12 +82,7 @@ export const login = async (req, res) => {
         .status(400)
         .json({ message: "email or password is not correct" });
     }
-    return res.status(200).json({ message: "Login is successfully" });
-  } catch (error) {
-    return res.status(500).json({ message: "internal server error" });
-  }
-
-  const tokens = jwt.sign(
+    const tokens = jwt.sign(
     {
       id: userIsExist._id,
       name: userIsExist.name,
@@ -109,4 +104,9 @@ export const login = async (req, res) => {
       },
       tokens,
     });
+  } catch (error) {
+    return res.status(500).json({ message: "internal server error" });
+  }
+
+  
 };

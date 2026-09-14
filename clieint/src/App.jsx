@@ -6,6 +6,7 @@ import LandingPage from "./page/Home/LandingPage.jsx"
 import DisplayCategories from "./components/Category/Displaycategories.jsx"
 import './App.css'
 import ViewProduct from "./components/Products/ViewProduct.jsx"
+import Register from "./components/Auth/Register.jsx"
 
 
 
@@ -21,6 +22,7 @@ function App() {
        <Route path="/categories" element={<DisplayCategories/>}/> 
       <Route path="/products" element={<ProductList/>}/>
       <Route path="/product/:id" element={<ViewProduct/>}/>
+      <Route path="/register" element={<Register/>}/>
      </Routes>
      
     </>

@@ -60,6 +60,7 @@ body {
   text-align: center;
   min-height: 100svh;
   display: flex;
+  background-color: #fff;
   flex-direction: column;
   box-sizing: border-box;
 }
