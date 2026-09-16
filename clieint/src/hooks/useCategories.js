@@ -11,7 +11,7 @@ export const useCategories = () => {
       console.log(res);
       setCategories(res.data.categories);
     } catch (error) {
-      console.error(error);
+      toast.error(error.response.data.message || "something went wrong");
     }
 
     useEffect(() => {

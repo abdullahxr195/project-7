@@ -22,7 +22,7 @@ export const register = async (req, res) => {
       return res.status(400).json({ message: "email already exist" });
     }
 
-    const emaildRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const emaildRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (emaildRegex.test(email)) {
       return res.status(400).json({ message: "pleas enter a valid email!" });
     }
@@ -63,11 +63,9 @@ export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({
-          message: "Please enter your email and your password to login",
-        });
+      return res.status(400).json({
+        message: "Please enter your email and your password to login",
+      });
     }
     const userIsExist = await User.findOne({ email });
     if (!userIsExist) {
@@ -83,18 +81,16 @@ export const login = async (req, res) => {
         .json({ message: "email or password is not correct" });
     }
     const tokens = jwt.sign(
-    {
-      id: userIsExist._id,
-      name: userIsExist.name,
-      email: userIsExist.email,
-      role: userIsExist.role,
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: "15m" },
-  );
-  return res
-    .status(200)
-    .json({
+      {
+        id: userIsExist._id,
+        name: userIsExist.name,
+        email: userIsExist.email,
+        role: userIsExist.role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "15m" },
+    );
+    return res.status(200).json({
       message: "logged in successfully",
       usre: {
         id: userIsExist._id,
@@ -107,6 +103,17 @@ export const login = async (req, res) => {
   } catch (error) {
     return res.status(500).json({ message: "internal server error" });
   }
+};
 
-  
+export const currentUser = async (rea, req) => {
+  try {
+    const id = req.user.id;
+    if (!id) {
+      return res.status(401).json({ message: "you dont have access" });
+    }
+     return res.status(200).json({ message: "ok", currentUser:req.user });
+
+  } catch (error) {
+    return res.status(500).json({ message: "internal server error" });
+  }
 };

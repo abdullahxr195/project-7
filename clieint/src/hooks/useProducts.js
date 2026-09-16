@@ -11,8 +11,8 @@ export const useProducts = () => {
 
       setProducts(res.data.products);
     } catch (error) {
-      toast.error("something went worng !");
-      console.log(error);
+      toast.error(error.response.data.message || "something went wrong");
+
       return;
     }
   };
@@ -23,8 +23,8 @@ export const useProducts = () => {
       setProduct(res.data.product);
       toast.success("res.data.message");
     } catch (error) {
-      toast.error("something went worng !");
-      console.log(error);
+      toast.error(error.response.data.message || "something went wrong");
+
       return;
     }
   };

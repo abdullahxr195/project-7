@@ -18,7 +18,7 @@ email:{
 },
 
 
-hashed_password:{
+confirmPassword:{
     type:String,
     required:true,
 

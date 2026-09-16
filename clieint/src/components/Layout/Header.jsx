@@ -7,9 +7,16 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { currentUser } from "../../../../server/src/controller/auth.Controller";
+import { useAuth } from "../../hooks/useAuth";
+import { useEffect } from "react";
 
 export default function Header() {
   const navigate = useNavigate();
+  const { currentUser, logout, authMe } = useAuth();
+  useEffect(() => {
+    authMe();
+  }, []);
   return (
     <>
       <AppBar position="sticky" sx={{ bgcolor: "#0048BA" }}>
@@ -41,8 +48,18 @@ export default function Header() {
 
               <MenuItem>Contact Us</MenuItem>
               <MenuItem>Cart</MenuItem>
-              <MenuItem>Login</MenuItem>
-              <MenuItem  onClick={() => navigate("/register")}>Register</MenuItem>
+              {!currentUser || Object.keys(currentUser).length === 0 ? (
+                <>
+                  <MenuItem onClick={() => navigate("/login")}>Login</MenuItem>
+                  <MenuItem onClick={() => navigate("/register")}>
+                    Register
+                  </MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                </>
+              )}
             </MenuList>
           </Box>
         </Toolbar>

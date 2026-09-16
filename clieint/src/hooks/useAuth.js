@@ -1,6 +1,10 @@
 import toast from "react-hot-toast";
 import { api } from "../api";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 export const useAuth = () => {
+  const [currentUser, setCurrentUser] = useState({});
+  const navigate = useNavigate();
   const register = async ({
     name,
     email,
@@ -34,12 +38,59 @@ export const useAuth = () => {
         password,
         confirmPassword,
       });
-      toast.success(res.data.message)
+      toast.success(res.data.message);
     } catch (error) {
-      toast.error("something went wrong");
-      console.error(error);
+      toast.error(error.response.data.message || "something went wrong");
+      console.log(error)
       return;
     }
   };
-  return { register };
+
+  const login = async ({ email, password }) => {
+    try {
+      if (!email || !password) {
+        toast.error("Please fill all fields ");
+        return;
+      }
+      const res = await api.post("/auth/login", { email, password });
+      toast.success(res.data.message);
+      const { user, tokens } = res.data;
+      localStorage.setItem("tokens", JSON.stringify(tokens));
+      if(user.role === "admin") navigate("/admin/dashbord")
+        if(user.role === "user")navigate("/store-home")
+
+      
+    } catch (error) {
+      toast.error(error.response.data.message || "something went wrong");
+      console.log(error)
+      return
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await localStorage.removeItem("currentUser");
+      await localStorage.removeItem("tokens");
+      setCurrentUser({})
+      navigate("/");
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "something went wrong");
+      console.log(error)
+      return;
+    }
+  };
+
+  const authMe = async () => {
+    try {
+        const res = await api.get("/auth/me")
+        setCurrentUser(res.data.currentUser)
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "something went wrong");
+      console.log(error)
+      return;
+    }
+  };
+
+
+  return { register, login, logout , currentUser ,authMe};
 };
