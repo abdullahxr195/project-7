@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { currentUser } from "../../../../server/src/controller/auth.Controller";
+
 import { useAuth } from "../../hooks/useAuth";
 import { useEffect } from "react";
 

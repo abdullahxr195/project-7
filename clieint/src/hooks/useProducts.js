@@ -19,7 +19,7 @@ export const useProducts = () => {
 
   const fetchProductById = async (productId) => {
     try {
-      const res = await api.get("/product/$(productId)");
+      const res = await api.get(`/product/${productId}`);
       setProduct(res.data.product);
       toast.success("res.data.message");
     } catch (error) {
