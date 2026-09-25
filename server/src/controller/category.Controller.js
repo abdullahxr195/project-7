@@ -1,5 +1,5 @@
 import Category from "../models/category.Model.js";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const getAllCategories = async (req, res) => {
   try {
     const categories = await Category.find();
@@ -24,19 +24,17 @@ export const createCategory = async (req, res) => {
     const { name, description } = req.body;
 
     if (!name) {
-      return res 
+      return res
         .status(400)
         .json({ message: "please enter a name , its required" });
     }
 
     const isExist = await Category.findOne({ name });
     if (isExist) {
-      return res
-        .status(400)
-        .json({
-          message:
-            "this is category is already exist , please enter another name",
-        });
+      return res.status(400).json({
+        message:
+          "this is category is already exist , please enter another name",
+      });
     }
 
     const category = await Category.create({ name, description });
