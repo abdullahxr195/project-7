@@ -6,7 +6,7 @@ export default function ManageUsers(){
 return(<>
 
       
-          <Typography variant="h2">Manage Users</Typography>
+ <Typography variant="h2">Manage Users</Typography>
        
 
 </>)
